@@ -13,10 +13,16 @@ function Header() {
       >
         menu
       </button>
-      <div className="fixed invisible top-0 left-0 z-10 bg-white p-4 w-2/3 h-dvh">
+      <div
+        data-menustatus={menuStatus === "open" ? "open" : "close"}
+        className="invisible fixed left-0 top-0 z-10 h-dvh w-2/3 bg-white p-4 data-menustatus:visible"
+      >
         <div className="flex justify-between">
           <div>BIBLE</div>
-          <button onClick={() => closeMenu} className="text-white bg-slate-500">
+          <button
+            onClick={() => closeMenu()}
+            className="bg-slate-500 text-white"
+          >
             close menu
           </button>
         </div>
@@ -27,8 +33,9 @@ function Header() {
         </ul>
       </div>
       <div
-        onClick={() => closeMenu}
-        className="fixed top-0 hidden left-0 h-dvh bg-black opacity-50 w-full"
+        data-menustatus={menuStatus === "open" ? "open" : "close"}
+        onClick={() => closeMenu()}
+        className="fixed left-0 top-0 hidden h-dvh w-full bg-black opacity-50 data-menustatus:block"
       ></div>
       <div className="flex gap-x-2">
         <button>Search</button>
