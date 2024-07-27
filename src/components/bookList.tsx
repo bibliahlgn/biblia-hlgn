@@ -1,14 +1,25 @@
+import books from "../data/booklist.json";
 import { useState } from "react";
 
-export function BookList() {
-  const booknames = {
-    old: ["Genesis50", "Exodus40"],
-    new: ["Mateo28", "Marcos16", "Lucas24"],
-  };
-
+export default function BookList({
+  chapterCount,
+  setChapterCount,
+}: {
+  chapterCount: number;
+  setChapterCount: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const [testament, setTestament] = useState("old");
 
   const bookName = (i: string) => i.replace(/\d+$/, "");
+  const toggleChapters = (i: string) => {
+    const count = parseInt(i.match(/\d+/)![0]);
+
+    if (count === chapterCount) {
+      setChapterCount(0);
+    } else {
+      setChapterCount(count);
+    }
+  };
 
   return (
     <>
@@ -20,17 +31,21 @@ export function BookList() {
         data-isnew={testament === "new" ? "true" : "false"}
         className="data-isnew:hidden"
       >
-        {booknames.old.map((i) => (
-          <li key={i.toLowerCase()} className="cursor-pointer">
+        {books.old.map((i) => (
+          <li
+            key={i.toLowerCase()}
+            onClick={() => toggleChapters(i)}
+            className="cursor-pointer"
+          >
             {bookName(i)}
           </li>
         ))}
       </ul>
       <ul
         data-isnew={testament === "new" ? "true" : "false"}
-        className="data-isnew:block hidden"
+        className="hidden data-isnew:block"
       >
-        {booknames.new.map((i) => (
+        {books.new.map((i) => (
           <li key={i.toLowerCase()}>{bookName(i)}</li>
         ))}
       </ul>
