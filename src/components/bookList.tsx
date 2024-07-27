@@ -1,5 +1,7 @@
 import books from "../data/booklist.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type testamentTYPE = "old" | "new";
 
 export default function BookList({
   chapterCount,
@@ -8,7 +10,17 @@ export default function BookList({
   chapterCount: number;
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const [testament, setTestament] = useState("old");
+  const [testament, setTestament] = useState<testamentTYPE>(() => {
+    const selectedTestament = sessionStorage.getItem("OpenTESTAMENT");
+    return selectedTestament === "old" || selectedTestament === "new"
+      ? selectedTestament
+      : "old";
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("OpenTESTAMENT", testament);
+  }, [testament]);
+
   const [openBook, setOpenBook] = useState("");
 
   const bookName = (i: string) => i.replace(/\d+$/, "");
