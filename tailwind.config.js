@@ -5,6 +5,7 @@ export default {
     extend: {},
     data: {
       menustatus: "menustatus='open'",
+      isnew: "isnew='true'",
     },
   },
   plugins: [],
