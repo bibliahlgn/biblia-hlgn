@@ -1,5 +1,6 @@
-import books from "../data/booklist.json";
 import { useEffect, useState } from "react";
+import books from "../data/booklist.json";
+import BookListItem from "./bookListItem";
 
 export default function BookList({
   chapterCount,
@@ -9,39 +10,39 @@ export default function BookList({
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const [isNewTestament, setNewTestament] = useState<boolean>(() => {
-    const selectedTestament = sessionStorage.getItem("OpenTESTAMENT");
+    const selectedTestament = sessionStorage.getItem("isNewTestament");
     return selectedTestament ? JSON.parse(selectedTestament) : false;
   });
 
   const toggleTestament = () => {
     setNewTestament((prevState) => !prevState);
-    if (chapterCount !== 0) {
-      setChapterCount(0);
-    }
+    // if (chapterCount !== 0) {
+    //   setChapterCount(0);
+    // }
   };
 
   useEffect(() => {
-    sessionStorage.setItem("OpenTESTAMENT", JSON.stringify(isNewTestament));
+    sessionStorage.setItem("isNewTestament", JSON.stringify(isNewTestament));
   }, [isNewTestament]);
 
   const [openBook, setOpenBook] = useState("");
 
-  const bookName = (i: string) => i.replace(/\d+$/, "");
+  const getBookName = (i: string) => i.replace(/\d+$/, "");
   const toggleChapters = (i: string) => {
     const count = parseInt(i.match(/\d+/)![0]);
 
-    if (count === chapterCount && bookName(i) === openBook) {
+    if (count === chapterCount && getBookName(i) === openBook) {
       setChapterCount(0);
     } else {
       setChapterCount(count);
-      setOpenBook(bookName(i));
+      setOpenBook(getBookName(i));
     }
   };
 
   return (
-    <>
+    <div>
       <div>
-        <button onClick={() => toggleTestament()}>
+        <button onClick={() => toggleTestament()} className="border">
           <span
             data-isnew={isNewTestament ? "true" : "false"}
             className="bg-slate-400 data-isnew:bg-transparent"
@@ -59,22 +60,26 @@ export default function BookList({
       {!isNewTestament ? (
         <ul>
           {books.old.map((i) => (
-            <li
-              key={i.toLowerCase()}
-              onClick={() => toggleChapters(i)}
-              className="cursor-pointer"
-            >
-              {bookName(i)}
-            </li>
+            <BookListItem
+              key={i}
+              bookname={i}
+              getBookName={getBookName}
+              toggleChapters={toggleChapters}
+            ></BookListItem>
           ))}
         </ul>
       ) : (
         <ul>
           {books.new.map((i) => (
-            <li key={i.toLowerCase()}>{bookName(i)}</li>
+            <BookListItem
+              key={i}
+              bookname={i}
+              getBookName={getBookName}
+              toggleChapters={toggleChapters}
+            ></BookListItem>
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
