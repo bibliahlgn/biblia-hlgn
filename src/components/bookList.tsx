@@ -9,15 +9,17 @@ export default function BookList({
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const [testament, setTestament] = useState("old");
+  const [openBook, setOpenBook] = useState("");
 
   const bookName = (i: string) => i.replace(/\d+$/, "");
   const toggleChapters = (i: string) => {
     const count = parseInt(i.match(/\d+/)![0]);
 
-    if (count === chapterCount) {
+    if (count === chapterCount && bookName(i) === openBook) {
       setChapterCount(0);
     } else {
       setChapterCount(count);
+      setOpenBook(bookName(i));
     }
   };
 
