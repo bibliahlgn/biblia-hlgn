@@ -8,5 +8,5 @@ export default {
       isnew: "isnew='true'",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
