@@ -5,9 +5,15 @@ import BookListItem from "./bookListItem";
 export default function BookList({
   chapterCount,
   setChapterCount,
+  openBook,
+  setOpenBook,
+  setActiveTestament,
 }: {
   chapterCount: number;
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
+  openBook: string;
+  setOpenBook: React.Dispatch<React.SetStateAction<string>>;
+  setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
 }) {
   const [isNewTestament, setNewTestament] = useState<boolean>(() => {
     const selectedTestament = sessionStorage.getItem("isNewTestament");
@@ -23,9 +29,11 @@ export default function BookList({
 
   useEffect(() => {
     sessionStorage.setItem("isNewTestament", JSON.stringify(isNewTestament));
-  }, [isNewTestament]);
 
-  const [openBook, setOpenBook] = useState("");
+    if (isNewTestament) {
+      setActiveTestament("new");
+    } else setActiveTestament("old");
+  }, [isNewTestament]);
 
   const getBookName = (i: string) => i.replace(/\d+$/, "");
   const toggleChapters = (i: string) => {
