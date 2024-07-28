@@ -3,29 +3,18 @@ import books from "../data/booklist.json";
 import BookListItem from "./bookListItem";
 
 export default function BookList({
-  chapterCount,
   setChapterCount,
-  openBook,
-  setOpenBook,
+  setSelectedBook,
   setActiveTestament,
 }: {
-  chapterCount: number;
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
-  openBook: string;
-  setOpenBook: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedBook: React.Dispatch<React.SetStateAction<string>>;
   setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
 }) {
   const [isNewTestament, setNewTestament] = useState<boolean>(() => {
     const selectedTestament = sessionStorage.getItem("isNewTestament");
     return selectedTestament ? JSON.parse(selectedTestament) : false;
   });
-
-  const toggleTestament = () => {
-    setNewTestament((prevState) => !prevState);
-    // if (chapterCount !== 0) {
-    //   setChapterCount(0);
-    // }
-  };
 
   useEffect(() => {
     sessionStorage.setItem("isNewTestament", JSON.stringify(isNewTestament));
@@ -35,16 +24,17 @@ export default function BookList({
     } else setActiveTestament("old");
   }, [isNewTestament]);
 
+  const toggleTestament = () => {
+    setNewTestament((prevState) => !prevState);
+  };
+
   const getBookName = (i: string) => i.replace(/\d+$/, "");
+
   const toggleChapters = (i: string) => {
     const count = parseInt(i.match(/\d+/)![0]);
 
-    if (count === chapterCount && getBookName(i) === openBook) {
-      setChapterCount(0);
-    } else {
-      setChapterCount(count);
-      setOpenBook(getBookName(i));
-    }
+    setChapterCount(count);
+    setSelectedBook(getBookName(i));
   };
 
   return (

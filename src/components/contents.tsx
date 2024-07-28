@@ -4,19 +4,20 @@ import DOMPurify from "dompurify";
 export default function Contents({
   bookToOpen,
   activeTestament,
+  selectedBook,
 }: {
   bookToOpen: string;
   activeTestament: "old" | "new";
+  selectedBook: string;
 }) {
-  const [rawContent, setRawContent] = useState("");
-  console.log(rawContent);
+  const [rawContent, setRawContent] = useState<string>("");
 
   useEffect(() => {
     const fetchBook = async () => {
       if (bookToOpen != "" && activeTestament != null) {
-        const resp = await fetch(
-          `books/${activeTestament}/genesis/${bookToOpen}.htm`,
-        );
+        const pathToBook = `books/${activeTestament}/${selectedBook.toLowerCase()}/${bookToOpen}.htm`;
+
+        const resp = await fetch(pathToBook);
         const raw = await resp.text();
 
         const purifiedHTML = DOMPurify.sanitize(raw, {

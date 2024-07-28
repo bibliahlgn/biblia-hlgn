@@ -11,7 +11,7 @@ function Header() {
       <button
         onClick={() => (menuStatus === "close" ? setMenuStatus("open") : null)}
       >
-        menu
+        Book List
       </button>
       <div
         data-menustatus={menuStatus === "open" ? "open" : "close"}

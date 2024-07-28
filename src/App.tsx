@@ -5,34 +5,31 @@ import ChapterList from "./components/chapterList";
 import Contents from "./components/contents";
 
 function App() {
+  //chapterCount is the total number of chapters in a book (selected book)
   const [chapterCount, setChapterCount] = useState<number>(0);
+  //bookToOpen will be the filename of what book + chapter to open
   const [bookToOpen, setBookToOpen] = useState<string>("");
-  const [openBook, setOpenBook] = useState<string>("");
+  const [selectedBook, setSelectedBook] = useState<string>("");
   const [activeTestament, setActiveTestament] = useState<"old" | "new">("old");
-
-  // if (bookToOpen != "") {
-  //   console.log(bookToOpen);
-  // }
 
   return (
     <>
       <Header />
       <main>
         <BookList
-          chapterCount={chapterCount}
           setChapterCount={setChapterCount}
-          openBook={openBook}
-          setOpenBook={setOpenBook}
+          setSelectedBook={setSelectedBook}
           setActiveTestament={setActiveTestament}
         />
         <Contents
           bookToOpen={bookToOpen}
+          selectedBook={selectedBook}
           activeTestament={activeTestament}
         ></Contents>
         <ChapterList
           chapterCount={chapterCount}
-          openBook={openBook}
           setBookToOpen={setBookToOpen}
+          selectedBook={selectedBook}
         />
       </main>
     </>
