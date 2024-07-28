@@ -1,15 +1,16 @@
 export default function ChapterList({
   chapterCount,
-  openBook,
+  selectedBook,
   setBookToOpen,
 }: {
   chapterCount: number;
-  openBook: string;
+  selectedBook: string;
   setBookToOpen: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const setWhatToOpen = (e: React.MouseEvent<HTMLLIElement>) => {
     setBookToOpen(
-      `${openBook.toLowerCase()}${(e.target as HTMLLIElement).textContent}`,
+      //e.target.textContent is the the selected verse or activeVerse
+      `${selectedBook.toLowerCase()}${(e.target as HTMLLIElement).textContent}`,
     );
   };
 
