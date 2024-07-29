@@ -31,6 +31,7 @@ function App() {
           setChapterCount={setChapterCount}
           selectedBook={selectedBook}
           setSelectedBook={setSelectedBook}
+          activeTestament={activeTestament}
           setActiveTestament={setActiveTestament}
           setBookListText={setBookListText}
           activeList={activeList}

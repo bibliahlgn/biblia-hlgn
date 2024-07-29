@@ -16,7 +16,6 @@ function Header({
         <button onClick={() => toggleBookList({ setActiveList })}>
           {bookListText}
         </button>
-
         <button onClick={() => toggleChapterList({ setActiveList })}>
           {selectedChapter}
         </button>
