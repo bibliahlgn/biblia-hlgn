@@ -40,11 +40,11 @@ export default function ChapterList({
   };
 
   return (
-    <ul
+    <div
       data-activelist={activeList.chapterList ? "true" : "false"}
-      className="data-activelist:flex hidden flex-wrap gap-2"
+      className="data-activelist:block absolute bottom-0 top-0 hidden bg-slate-400"
     >
-      {renderChapterButtons()}
-    </ul>
+      <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>
+    </div>
   );
 }

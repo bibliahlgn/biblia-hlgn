@@ -21,13 +21,13 @@ function App() {
   const [rawContent, setRawContent] = useState<string>("");
 
   return (
-    <>
+    <div className="flex min-h-dvh flex-col">
       <Header
         bookListText={bookListText}
         selectedChapter={selectedChapter}
         setActiveList={setActiveList}
       />
-      <main>
+      <main className="relative flex-1">
         <BookList
           setChapterCount={setChapterCount}
           selectedBook={selectedBook}
@@ -45,6 +45,7 @@ function App() {
           activeTestament={activeTestament}
           rawContent={rawContent}
           setRawContent={setRawContent}
+          selectedChapter={selectedChapter}
         ></Contents>
         <ChapterList
           chapterCount={chapterCount}
@@ -55,7 +56,7 @@ function App() {
           setActiveList={setActiveList}
         />
       </main>
-    </>
+    </div>
   );
 }
 
