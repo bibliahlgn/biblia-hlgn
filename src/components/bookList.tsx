@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import books from "../data/booklist.json";
 import BookListItem from "./bookListItem";
 import { activeListTYPES } from "../types";
 import { toggleBookList } from "../utils/toggleList";
+import TestamentSwitch from "../utils/testamentSwitch";
 
 export default function BookList({
   setChapterCount,
   selectedBook,
   setSelectedBook,
+  activeTestament,
   setActiveTestament,
   setBookListText,
   activeList,
@@ -16,8 +18,9 @@ export default function BookList({
   setSelectedChapter,
 }: {
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
-  setSelectedBook: React.Dispatch<React.SetStateAction<string>>;
   selectedBook: string;
+  setSelectedBook: React.Dispatch<React.SetStateAction<string>>;
+  activeTestament: "old" | "new";
   setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
   setBookListText: React.Dispatch<React.SetStateAction<string>>;
   activeList: activeListTYPES;
@@ -25,23 +28,6 @@ export default function BookList({
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
   setSelectedChapter: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const [isNewTestament, setNewTestament] = useState<boolean>(() => {
-    const selectedTestament = sessionStorage.getItem("isNewTestament");
-    return selectedTestament ? JSON.parse(selectedTestament) : false;
-  });
-
-  useEffect(() => {
-    sessionStorage.setItem("isNewTestament", JSON.stringify(isNewTestament));
-
-    if (isNewTestament) {
-      setActiveTestament("new");
-    } else setActiveTestament("old");
-  }, [isNewTestament]);
-
-  const toggleTestament = () => {
-    setNewTestament((prevState) => !prevState);
-  };
-
   const getBookName = (i: string) => i.replace(/\d+$/, "");
 
   const toggleChapters = (i: string) => {
@@ -64,23 +50,11 @@ export default function BookList({
         data-activelist={activeList.bookList ? "true" : "false"}
         className="data-activelist:block absolute bottom-0 top-0 z-10 hidden w-3/4 bg-slate-400"
       >
-        <button onClick={() => toggleTestament()} className="border">
-          <span
-            data-isnew={isNewTestament ? "true" : "false"}
-            className="bg-slate-400 data-isnew:bg-transparent"
-          >
-            Old
-          </span>
-          <span
-            data-isnew={isNewTestament ? "true" : "false"}
-            className="bg-transparent data-isnew:bg-slate-400"
-          >
-            New
-          </span>
-        </button>
-
+        <TestamentSwitch
+          setActiveTestament={setActiveTestament}
+        ></TestamentSwitch>
         <ul>
-          {(isNewTestament ? books.new : books.old).map((i) => (
+          {(activeTestament === "new" ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}
               bookname={i}
