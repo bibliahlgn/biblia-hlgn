@@ -7,12 +7,14 @@ export default function Contents({
   selectedBook,
   rawContent,
   setRawContent,
+  selectedChapter,
 }: {
   bookToOpen: string;
   activeTestament: "old" | "new";
   selectedBook: string;
   rawContent: string;
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
+  selectedChapter: string;
 }) {
   useEffect(() => {
     const fetchBook = async () => {
@@ -43,7 +45,7 @@ export default function Contents({
       }
     };
     fetchBook();
-  }, [bookToOpen]);
+  }, [bookToOpen && selectedChapter]);
 
   return (
     <article
