@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import books from "../data/booklist.json";
 import BookListItem from "./bookListItem";
 import { activeListTYPES } from "../types";
+import { toggleBookList } from "../utils/toggleList";
 
 export default function BookList({
   setChapterCount,
@@ -91,7 +92,7 @@ export default function BookList({
       </nav>
       <div
         data-activelist={activeList.bookList ? "true" : "false"}
-        onClick={() => setActiveList({ bookList: false })}
+        onClick={() => toggleBookList({ setActiveList })}
         className="data-activelist:block absolute inset-0 hidden bg-black opacity-50"
       ></div>
     </div>
