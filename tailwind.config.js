@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {},
     data: {
-      menustatus: "menustatus='open'",
       isnew: "isnew='true'",
+      activelist: "activelist='true'",
     },
   },
   plugins: [require("@tailwindcss/typography")],

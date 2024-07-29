@@ -1,15 +1,28 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import books from "../data/booklist.json";
 import BookListItem from "./bookListItem";
+import { activeListTYPES } from "../types";
 
 export default function BookList({
   setChapterCount,
+  selectedBook,
   setSelectedBook,
   setActiveTestament,
+  setBookListText,
+  activeList,
+  setActiveList,
+  setRawContent,
+  setSelectedChapter,
 }: {
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
   setSelectedBook: React.Dispatch<React.SetStateAction<string>>;
+  selectedBook: string;
   setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
+  setBookListText: React.Dispatch<React.SetStateAction<string>>;
+  activeList: activeListTYPES;
+  setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
+  setRawContent: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedChapter: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [isNewTestament, setNewTestament] = useState<boolean>(() => {
     const selectedTestament = sessionStorage.getItem("isNewTestament");
@@ -35,11 +48,21 @@ export default function BookList({
 
     setChapterCount(count);
     setSelectedBook(getBookName(i));
+    setBookListText(getBookName(i));
+    setActiveList({ chapterList: true, bookList: false });
+
+    if (selectedBook !== getBookName(i)) {
+      setRawContent("");
+      setSelectedChapter("");
+    }
   };
 
   return (
-    <div>
-      <div>
+    <>
+      <nav
+        data-activelist={activeList.bookList ? "true" : "false"}
+        className="data-activelist:block hidden"
+      >
         <button onClick={() => toggleTestament()} className="border">
           <span
             data-isnew={isNewTestament ? "true" : "false"}
@@ -54,10 +77,9 @@ export default function BookList({
             New
           </span>
         </button>
-      </div>
-      {!isNewTestament ? (
+
         <ul>
-          {books.old.map((i) => (
+          {(isNewTestament ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}
               bookname={i}
@@ -66,18 +88,12 @@ export default function BookList({
             ></BookListItem>
           ))}
         </ul>
-      ) : (
-        <ul>
-          {books.new.map((i) => (
-            <BookListItem
-              key={i}
-              bookname={i}
-              getBookName={getBookName}
-              toggleChapters={toggleChapters}
-            ></BookListItem>
-          ))}
-        </ul>
-      )}
-    </div>
+      </nav>
+      <div
+        data-activelist={activeList.bookList ? "true" : "false"}
+        onClick={() => setActiveList({ bookList: false })}
+        className="data-activelist:block hidden h-dvh w-full bg-black opacity-50"
+      ></div>
+    </>
   );
 }
