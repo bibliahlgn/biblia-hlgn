@@ -21,7 +21,7 @@ export default function Contents({
         selectedChapter != "" &&
         activeTestament != null
       ) {
-        const pathToBook = `books/${activeTestament}/${selectedBook.toLowerCase()}/${selectedBook.toLowerCase()}${selectedChapter}.htm`;
+        const pathToBook = `books/${activeTestament}/${selectedBook}/${selectedBook}${selectedChapter}.htm`;
 
         const resp = await fetch(pathToBook);
         const raw = await resp.text();
