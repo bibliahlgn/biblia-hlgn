@@ -58,10 +58,10 @@ export default function BookList({
   };
 
   return (
-    <>
+    <div>
       <nav
         data-activelist={activeList.bookList ? "true" : "false"}
-        className="data-activelist:block hidden"
+        className="data-activelist:block absolute bottom-0 top-0 z-10 hidden w-3/4 bg-slate-400"
       >
         <button onClick={() => toggleTestament()} className="border">
           <span
@@ -92,8 +92,8 @@ export default function BookList({
       <div
         data-activelist={activeList.bookList ? "true" : "false"}
         onClick={() => setActiveList({ bookList: false })}
-        className="data-activelist:block hidden h-dvh w-full bg-black opacity-50"
+        className="data-activelist:block absolute inset-0 hidden bg-black opacity-50"
       ></div>
-    </>
+    </div>
   );
 }

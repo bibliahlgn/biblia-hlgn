@@ -6,6 +6,7 @@ export default {
     data: {
       isnew: "isnew='true'",
       activelist: "activelist='true'",
+      visiblecontent: "visiblecontent='true'",
     },
   },
   plugins: [require("@tailwindcss/typography")],
