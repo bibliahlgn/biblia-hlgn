@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import DOMPurify from "dompurify";
 
 export default function Contents({
-  bookToOpen,
   activeTestament,
   selectedBook,
   rawContent,
   setRawContent,
   selectedChapter,
 }: {
-  bookToOpen: string;
   activeTestament: "old" | "new";
   selectedBook: string;
   rawContent: string;
@@ -18,8 +16,12 @@ export default function Contents({
 }) {
   useEffect(() => {
     const fetchBook = async () => {
-      if (bookToOpen != "" && activeTestament != null) {
-        const pathToBook = `books/${activeTestament}/${selectedBook.toLowerCase()}/${bookToOpen}.htm`;
+      if (
+        selectedBook != "" &&
+        selectedChapter != "" &&
+        activeTestament != null
+      ) {
+        const pathToBook = `books/${activeTestament}/${selectedBook.toLowerCase()}/${selectedBook.toLowerCase()}${selectedChapter}.htm`;
 
         const resp = await fetch(pathToBook);
         const raw = await resp.text();
@@ -45,7 +47,7 @@ export default function Contents({
       }
     };
     fetchBook();
-  }, [bookToOpen && selectedChapter]);
+  }, [selectedChapter]);
 
   return (
     <article
