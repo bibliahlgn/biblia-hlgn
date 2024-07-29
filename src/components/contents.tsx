@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DOMPurify from "dompurify";
 
 export default function Contents({
   bookToOpen,
   activeTestament,
   selectedBook,
+  rawContent,
+  setRawContent,
 }: {
   bookToOpen: string;
   activeTestament: "old" | "new";
   selectedBook: string;
+  rawContent: string;
+  setRawContent: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const [rawContent, setRawContent] = useState<string>("");
-
   useEffect(() => {
     const fetchBook = async () => {
       if (bookToOpen != "" && activeTestament != null) {
