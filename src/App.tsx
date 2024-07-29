@@ -9,7 +9,6 @@ function App() {
   //chapterCount is the total number of chapters in a book (selected book)
   const [chapterCount, setChapterCount] = useState<number>(0);
   //bookToOpen will be the filename of what book + chapter to open
-  const [bookToOpen, setBookToOpen] = useState<string>("");
   const [selectedBook, setSelectedBook] = useState<string>("");
   const [activeTestament, setActiveTestament] = useState<"old" | "new">("old");
   const [bookListText, setBookListText] = useState<string>("Book List");
@@ -40,7 +39,6 @@ function App() {
           setSelectedChapter={setSelectedChapter}
         />
         <Contents
-          bookToOpen={bookToOpen}
           selectedBook={selectedBook}
           activeTestament={activeTestament}
           rawContent={rawContent}
@@ -49,8 +47,6 @@ function App() {
         ></Contents>
         <ChapterList
           chapterCount={chapterCount}
-          setBookToOpen={setBookToOpen}
-          selectedBook={selectedBook}
           setSelectedChapter={setSelectedChapter}
           activeList={activeList}
           setActiveList={setActiveList}
