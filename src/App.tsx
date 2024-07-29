@@ -39,7 +39,7 @@ function App() {
           setSelectedChapter={setSelectedChapter}
         />
         <Contents
-          selectedBook={selectedBook}
+          selectedBook={selectedBook.toLowerCase()}
           activeTestament={activeTestament}
           rawContent={rawContent}
           setRawContent={setRawContent}
