@@ -11,7 +11,7 @@ function App() {
   //bookToOpen will be the filename of what book + chapter to open
   const [selectedBook, setSelectedBook] = useState<string>("");
   const [activeTestament, setActiveTestament] = useState<"old" | "new">("old");
-  const [bookListText, setBookListText] = useState<string>("Book List");
+  const [bookListText, setBookListText] = useState<string>("");
   const [selectedChapter, setSelectedChapter] = useState<string>("");
   const [activeList, setActiveList] = useState<activeListTYPES>({
     bookList: true,
@@ -20,13 +20,13 @@ function App() {
   const [rawContent, setRawContent] = useState<string>("");
 
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div>
       <Header
         bookListText={bookListText}
         selectedChapter={selectedChapter}
         setActiveList={setActiveList}
       />
-      <main className="relative flex-1">
+      <main className="relative min-h-dvh flex-1">
         <BookList
           setChapterCount={setChapterCount}
           selectedBook={selectedBook}

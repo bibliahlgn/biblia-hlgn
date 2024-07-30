@@ -33,7 +33,7 @@ export default function ChapterList({
   return (
     <div
       data-activelist={activeList.chapterList ? "true" : "false"}
-      className="data-activelist:block absolute bottom-0 top-0 hidden bg-slate-400"
+      className="absolute inset-0 hidden bg-slate-400 data-activelist:block"
     >
       <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>
     </div>
