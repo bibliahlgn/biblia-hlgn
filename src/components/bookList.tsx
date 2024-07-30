@@ -11,7 +11,6 @@ export default function BookList({
   setSelectedBook,
   activeTestament,
   setActiveTestament,
-  setBookListText,
   activeList,
   setActiveList,
   setRawContent,
@@ -22,7 +21,6 @@ export default function BookList({
   setSelectedBook: React.Dispatch<React.SetStateAction<string>>;
   activeTestament: "old" | "new";
   setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
-  setBookListText: React.Dispatch<React.SetStateAction<string>>;
   activeList: activeListTYPES;
   setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
@@ -35,7 +33,6 @@ export default function BookList({
 
     setChapterCount(count);
     setSelectedBook(getBookName(i));
-    setBookListText(getBookName(i));
     setActiveList({ chapterList: true, bookList: false });
 
     if (selectedBook !== getBookName(i)) {
@@ -79,9 +76,8 @@ export default function BookList({
           {(activeTestament === "new" ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}
-              bookname={i}
-              getBookName={getBookName}
-              toggleChapters={toggleChapters}
+              bookName={getBookName(i)}
+              toggleChapters={() => toggleChapters(i)}
             ></BookListItem>
           ))}
         </ul>
