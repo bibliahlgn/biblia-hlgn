@@ -2,11 +2,11 @@ import { activeListTYPES } from "../types";
 import { toggleBookList, toggleChapterList } from "../utils/toggleList";
 
 function Header({
-  bookListText,
+  selectedBook,
   selectedChapter,
   setActiveList,
 }: {
-  bookListText: string;
+  selectedBook: string;
   selectedChapter: string;
   setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
 }) {
@@ -14,7 +14,7 @@ function Header({
     <header className="flex justify-between px-4 py-2">
       <div className="flex gap-2">
         <button onClick={() => toggleBookList({ setActiveList })}>
-          {bookListText == "" && (
+          {selectedBook == "" && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1em"
@@ -28,7 +28,7 @@ function Header({
               />
             </svg>
           )}
-          {bookListText}
+          {selectedBook}
         </button>
         {selectedChapter != "" && (
           <button onClick={() => toggleChapterList({ setActiveList })}>

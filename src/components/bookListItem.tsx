@@ -1,15 +1,13 @@
 export default function BookListItem({
-  bookname,
+  bookName,
   toggleChapters,
-  getBookName,
 }: {
-  bookname: string;
-  toggleChapters: Function;
-  getBookName: Function;
+  bookName: string;
+  toggleChapters: () => void;
 }) {
   return (
-    <li onClick={() => toggleChapters(bookname)} className="cursor-pointer">
-      {getBookName(bookname)}
+    <li onClick={() => toggleChapters()} className="cursor-pointer">
+      {bookName}
     </li>
   );
 }
