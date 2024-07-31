@@ -52,7 +52,7 @@ function App() {
         <Contents
           rawContent={rawContent}
           setRawContent={setRawContent}
-          bookToOpen={bookToOpen}
+          pathFragments={bookToOpen}
         ></Contents>
         <ChapterList
           chapterCount={chapterCount}

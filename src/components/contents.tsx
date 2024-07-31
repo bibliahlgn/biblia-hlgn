@@ -5,20 +5,20 @@ import { bookToOpenTYPES } from "../types";
 export default function Contents({
   rawContent,
   setRawContent,
-  bookToOpen,
+  pathFragments,
 }: {
   rawContent: string;
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
-  bookToOpen: bookToOpenTYPES;
+  pathFragments: bookToOpenTYPES;
 }) {
   useEffect(() => {
     const fetchBook = async () => {
       if (
-        bookToOpen.bookName != "" &&
-        bookToOpen.chapter != "" &&
-        bookToOpen.testament != null
+        pathFragments.bookName != "" &&
+        pathFragments.chapter != "" &&
+        pathFragments.testament != null
       ) {
-        const pathToBook = `books/${bookToOpen.testament}/${bookToOpen.bookName}/${bookToOpen.bookName}${bookToOpen.chapter}.htm`;
+        const pathToBook = `books/${pathFragments.testament.toLowerCase()}/${pathFragments.bookName?.toLowerCase()}/${pathFragments.bookName?.toLowerCase()}${pathFragments.chapter}.htm`;
 
         const resp = await fetch(pathToBook);
         const raw = await resp.text();
@@ -44,7 +44,7 @@ export default function Contents({
       }
     };
     fetchBook();
-  }, [bookToOpen.chapter]);
+  }, [pathFragments.chapter]);
 
   return (
     <article
