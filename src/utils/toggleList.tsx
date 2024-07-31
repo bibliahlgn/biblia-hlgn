@@ -5,7 +5,10 @@ export function toggleBookList({
 }: {
   setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
 }) {
-  setActiveList((prevState) => ({ bookList: !prevState.bookList }));
+  setActiveList((prevState) => ({
+    bookList: !prevState.bookList,
+    chapterList: prevState.chapterList,
+  }));
 }
 
 export function toggleChapterList({

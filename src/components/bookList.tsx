@@ -45,7 +45,7 @@ export default function BookList({
     <div>
       <nav
         data-activelist={activeList.bookList ? "true" : "false"}
-        className="fixed inset-y-0 -left-full z-10 w-3/4 bg-slate-400 py-6 pl-12 transition-all duration-300 data-activelist:left-0"
+        className="fixed inset-y-0 -left-full z-20 w-3/4 bg-slate-400 py-6 pl-12 transition-all duration-300 data-activelist:left-0"
       >
         <div className="flex justify-between">
           <TestamentSwitch
@@ -85,7 +85,7 @@ export default function BookList({
       <div
         data-activelist={activeList.bookList ? "true" : "false"}
         onClick={() => toggleBookList({ setActiveList })}
-        className="fixed inset-0 hidden bg-black opacity-50 data-activelist:block"
+        className="fixed inset-0 z-10 hidden bg-black/80 data-activelist:block"
       ></div>
     </div>
   );
