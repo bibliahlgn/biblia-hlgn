@@ -1,27 +1,24 @@
 import React, { useEffect } from "react";
 import DOMPurify from "dompurify";
+import { bookToOpenTYPES } from "../types";
 
 export default function Contents({
-  activeTestament,
-  selectedBook,
   rawContent,
   setRawContent,
-  selectedChapter,
+  bookToOpen,
 }: {
-  activeTestament: "old" | "new";
-  selectedBook: string;
   rawContent: string;
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
-  selectedChapter: string;
+  bookToOpen: bookToOpenTYPES;
 }) {
   useEffect(() => {
     const fetchBook = async () => {
       if (
-        selectedBook != "" &&
-        selectedChapter != "" &&
-        activeTestament != null
+        bookToOpen.bookName != "" &&
+        bookToOpen.chapter != "" &&
+        bookToOpen.testament != null
       ) {
-        const pathToBook = `books/${activeTestament}/${selectedBook}/${selectedBook}${selectedChapter}.htm`;
+        const pathToBook = `books/${bookToOpen.testament}/${bookToOpen.bookName}/${bookToOpen.bookName}${bookToOpen.chapter}.htm`;
 
         const resp = await fetch(pathToBook);
         const raw = await resp.text();
@@ -47,7 +44,7 @@ export default function Contents({
       }
     };
     fetchBook();
-  }, [selectedChapter]);
+  }, [bookToOpen.chapter]);
 
   return (
     <article

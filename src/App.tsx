@@ -1,56 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/header";
 import BookList from "./components/bookList";
 import ChapterList from "./components/chapterList";
 import Contents from "./components/contents";
-import { activeListTYPES } from "./types";
+import { activeListTYPES, bookToOpenTYPES } from "./types";
 
 function App() {
-  //chapterCount is the total number of chapters in a book (selected book)
-  const [chapterCount, setChapterCount] = useState<number>(0);
-  //bookToOpen will be the filename of what book + chapter to open
-  const [selectedBook, setSelectedBook] = useState<string>("");
-  const [activeTestament, setActiveTestament] = useState<"old" | "new">("old");
-  const [bookListText, setBookListText] = useState<string>("");
-  const [selectedChapter, setSelectedChapter] = useState<string>("");
-  const [activeList, setActiveList] = useState<activeListTYPES>({
-    bookList: true,
-    chapterList: false,
-  });
   const [rawContent, setRawContent] = useState<string>("");
+  //chapterCount is the total number of chapters in a book (selected book)
+  const [chapterCount, setChapterCount] = useState<number>(() => {
+    const session = sessionStorage.getItem("CHAPTERCOUNT");
+    return session ? JSON.parse(session) : 0;
+  });
+  const [bookToOpen, setBookToOpen] = useState<bookToOpenTYPES>(() => {
+    const session = sessionStorage.getItem("BOOKTOOPEN");
+    return session
+      ? JSON.parse(session)
+      : {
+          testament: "old",
+          bookName: "",
+          chapter: "",
+        };
+  });
+  const [activeList, setActiveList] = useState<activeListTYPES>({
+    bookList:
+      bookToOpen.chapter != "" ||
+      (bookToOpen.bookName != "" && bookToOpen.chapter == "")
+        ? false
+        : true,
+    chapterList:
+      bookToOpen.bookName != "" && bookToOpen.chapter == "" ? true : false,
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("BOOKTOOPEN", JSON.stringify(bookToOpen));
+    sessionStorage.setItem("CHAPTERCOUNT", JSON.stringify(chapterCount));
+  }, [bookToOpen, chapterCount]);
 
   return (
     <div>
-      <Header
-        bookListText={bookListText}
-        selectedChapter={selectedChapter}
-        setActiveList={setActiveList}
-      />
+      <Header setActiveList={setActiveList} bookToOpen={bookToOpen} />
       <main className="relative min-h-dvh flex-1">
         <BookList
           setChapterCount={setChapterCount}
-          selectedBook={selectedBook}
-          setSelectedBook={setSelectedBook}
-          activeTestament={activeTestament}
-          setActiveTestament={setActiveTestament}
-          setBookListText={setBookListText}
           activeList={activeList}
           setActiveList={setActiveList}
           setRawContent={setRawContent}
-          setSelectedChapter={setSelectedChapter}
+          bookToOpen={bookToOpen}
+          setBookToOpen={setBookToOpen}
         />
         <Contents
-          selectedBook={selectedBook.toLowerCase()}
-          activeTestament={activeTestament}
           rawContent={rawContent}
           setRawContent={setRawContent}
-          selectedChapter={selectedChapter}
+          bookToOpen={bookToOpen}
         ></Contents>
         <ChapterList
           chapterCount={chapterCount}
-          setSelectedChapter={setSelectedChapter}
           activeList={activeList}
           setActiveList={setActiveList}
+          setBookToOpen={setBookToOpen}
         />
       </main>
     </div>

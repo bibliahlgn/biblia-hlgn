@@ -1,30 +1,24 @@
 import React from "react";
 import books from "../data/booklist.json";
 import BookListItem from "./bookListItem";
-import { activeListTYPES } from "../types";
+import { activeListTYPES, bookToOpenTYPES } from "../types";
 import { toggleBookList } from "../utils/toggleList";
 import TestamentSwitch from "../utils/testamentSwitch";
 
 export default function BookList({
   setChapterCount,
-  selectedBook,
-  setSelectedBook,
-  activeTestament,
-  setActiveTestament,
   activeList,
   setActiveList,
   setRawContent,
-  setSelectedChapter,
+  bookToOpen,
+  setBookToOpen,
 }: {
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
-  selectedBook: string;
-  setSelectedBook: React.Dispatch<React.SetStateAction<string>>;
-  activeTestament: "old" | "new";
-  setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
   activeList: activeListTYPES;
   setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedChapter: React.Dispatch<React.SetStateAction<string>>;
+  bookToOpen: bookToOpenTYPES;
+  setBookToOpen: React.Dispatch<React.SetStateAction<bookToOpenTYPES>>;
 }) {
   const getBookName = (i: string) => i.replace(/\d+$/, "");
 
@@ -32,12 +26,20 @@ export default function BookList({
     const count = parseInt(i.match(/\d+/)![0]);
 
     setChapterCount(count);
-    setSelectedBook(getBookName(i));
+    setBookToOpen((prev) => ({
+      testament: prev.testament,
+      bookName: getBookName(i),
+      chapter: prev.chapter,
+    }));
     setActiveList({ chapterList: true, bookList: false });
 
-    if (selectedBook !== getBookName(i)) {
+    if (bookToOpen.bookName !== getBookName(i)) {
       setRawContent("");
-      setSelectedChapter("");
+      setBookToOpen((prev) => ({
+        testament: prev.testament,
+        bookName: prev.bookName,
+        chapter: "",
+      }));
     }
   };
 
@@ -49,7 +51,8 @@ export default function BookList({
       >
         <div className="flex justify-between">
           <TestamentSwitch
-            setActiveTestament={setActiveTestament}
+            bookToOpen={bookToOpen}
+            setBookToOpen={setBookToOpen}
           ></TestamentSwitch>
           <button
             className="mr-8"
@@ -73,7 +76,7 @@ export default function BookList({
           </button>
         </div>
         <ul className="mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 pb-12">
-          {(activeTestament === "new" ? books.new : books.old).map((i) => (
+          {(bookToOpen.testament === "new" ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}
               bookName={getBookName(i)}
