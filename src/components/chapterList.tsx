@@ -1,20 +1,25 @@
-import { activeListTYPES } from "../types";
+import { activeListTYPES, bookToOpenTYPES } from "../types";
 
 export default function ChapterList({
   chapterCount,
-  setSelectedChapter,
   activeList,
   setActiveList,
+  setBookToOpen,
 }: {
   chapterCount: number;
-  setSelectedChapter: React.Dispatch<React.SetStateAction<string>>;
   activeList: activeListTYPES;
   setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
+  setBookToOpen: React.Dispatch<React.SetStateAction<bookToOpenTYPES>>;
 }) {
   const prepareContent = (e: React.MouseEvent<HTMLLIElement>) => {
     const chapter: string = (e.target as HTMLLIElement).textContent!;
-    setSelectedChapter(chapter);
     setActiveList({ chapterList: false });
+
+    setBookToOpen((prev) => ({
+      testament: prev.testament,
+      bookName: prev.bookName,
+      chapter: chapter,
+    }));
   };
 
   const renderChapterButtons = () => {
