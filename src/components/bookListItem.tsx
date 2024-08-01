@@ -8,7 +8,7 @@ export default function BookListItem({
   return (
     <li
       onClick={() => toggleChapters()}
-      className="text-muted_fg cursor-pointer font-medium"
+      className="text-muted_fg hover:text-accent_fg cursor-pointer font-medium transition-colors"
     >
       {bookName}
     </li>

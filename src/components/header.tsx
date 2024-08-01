@@ -9,7 +9,7 @@ function Header({
   bookToOpen: bookToOpenTYPES;
 }) {
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 border-border_clr/40 sticky top-0 z-10 flex justify-between border px-4 py-2 backdrop-blur">
+    <header className="bg-background/90 supports-[backdrop-filter]:bg-background/50 border-border_clr/40 sticky top-0 z-10 flex justify-between border px-4 py-2 backdrop-blur">
       <div className="flex gap-2">
         <button onClick={() => toggleBookList({ setActiveList })}>
           {bookToOpen.bookName == "" && (
