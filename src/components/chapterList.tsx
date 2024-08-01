@@ -27,7 +27,11 @@ export default function ChapterList({
 
     for (let i = 1; i <= chapterCount; i++) {
       items.push(
-        <li key={i} className="cursor-pointer" onClick={prepareContent}>
+        <li
+          key={i}
+          className="text-foreground flex-shrink-0 basis-10 rounded-md p-1 text-center hover:cursor-pointer"
+          onClick={prepareContent}
+        >
           {i}
         </li>,
       );
@@ -38,7 +42,7 @@ export default function ChapterList({
   return (
     <div
       data-activelist={activeList.chapterList ? "true" : "false"}
-      className="absolute inset-0 hidden bg-slate-400 data-activelist:block"
+      className="bg-background absolute inset-x-0 top-0 hidden min-h-dvh p-4 data-activelist:block"
     >
       <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>
     </div>

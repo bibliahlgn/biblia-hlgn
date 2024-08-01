@@ -28,23 +28,23 @@ export default function TestamentSwitch({
   return (
     <button
       onClick={() => toggleTestament()}
-      className="relative grid grid-cols-2 items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-md border px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+      className="border-border_clr/40 relative grid grid-cols-2 items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-md border px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <span
         data-isnew={isnew ? "true" : "false"}
-        className="z-10 text-white transition-all duration-500 data-isnew:text-black"
+        className="data-isnew:text-foreground text-background z-10 transition-all duration-500"
       >
         Da-an
       </span>
       <span
         data-isnew={isnew ? "true" : "false"}
-        className="z-10 text-black transition-all duration-500 data-isnew:text-white"
+        className="data-isnew:text-background text-foreground z-10 transition-all duration-500"
       >
         Bag-o
       </span>
       <div
         data-isnew={isnew ? "true" : "false"}
-        className="absolute inset-y-0 left-0 h-full w-1/2 bg-black transition-all duration-300 data-isnew:left-1/2 data-isnew:right-0"
+        className="bg-foreground absolute inset-y-0 left-0 h-full w-1/2 transition-all duration-300 data-isnew:left-1/2 data-isnew:right-0"
       ></div>
     </button>
   );
