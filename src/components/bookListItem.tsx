@@ -6,7 +6,10 @@ export default function BookListItem({
   toggleChapters: () => void;
 }) {
   return (
-    <li onClick={() => toggleChapters()} className="cursor-pointer">
+    <li
+      onClick={() => toggleChapters()}
+      className="text-muted_fg cursor-pointer font-medium"
+    >
       {bookName}
     </li>
   );
