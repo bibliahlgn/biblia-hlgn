@@ -16,6 +16,7 @@ export default {
       isnew: "isnew='true'",
       activelist: "activelist='true'",
       visiblecontent: "visiblecontent='true'",
+      darktheme: "darktheme='true'",
     },
   },
   plugins: [require("@tailwindcss/typography")],
