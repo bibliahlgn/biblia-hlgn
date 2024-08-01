@@ -37,10 +37,16 @@ function App() {
     sessionStorage.setItem("CHAPTERCOUNT", JSON.stringify(chapterCount));
   }, [bookToOpen, chapterCount]);
 
+  useEffect(() => {
+    if (activeList.bookList) {
+      document.body.classList.add("overflow-hidden");
+    } else document.body.classList.remove("overflow-hidden");
+  }, [activeList.bookList]);
+
   return (
-    <div>
+    <>
       <Header setActiveList={setActiveList} bookToOpen={bookToOpen} />
-      <main className="relative min-h-dvh flex-1">
+      <main className="relative min-h-dvh">
         <BookList
           setChapterCount={setChapterCount}
           activeList={activeList}
@@ -61,7 +67,7 @@ function App() {
           setBookToOpen={setBookToOpen}
         />
       </main>
-    </div>
+    </>
   );
 }
 
