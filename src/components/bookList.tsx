@@ -2,7 +2,7 @@ import React from "react";
 import books from "../data/booklist.json";
 import BookListItem from "./bookListItem";
 import { activeListTYPES, bookToOpenTYPES } from "../types";
-import { toggleBookList } from "../utils/toggleList";
+import { toggleBookList } from "../utils/toggleSwitch";
 import TestamentSwitch from "../utils/testamentSwitch";
 
 export default function BookList({
