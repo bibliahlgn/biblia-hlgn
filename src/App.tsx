@@ -4,6 +4,8 @@ import BookList from "./components/bookList";
 import ChapterList from "./components/chapterList";
 import Contents from "./components/contents";
 import { activeListTYPES, bookToOpenTYPES } from "./types";
+import books from "./data/booklist.json";
+import { getBookName } from "./utils/smallFunctions";
 
 function App() {
   const [rawContent, setRawContent] = useState<string>("");
@@ -42,6 +44,17 @@ function App() {
       document.body.classList.add("overflow-hidden");
     } else document.body.classList.remove("overflow-hidden");
   }, [activeList.bookList]);
+
+  //Temporary fix, needs the client to refresh
+  useEffect(() => {
+    setBookToOpen((prev) => ({
+      ...prev,
+      testament: books.new.map(getBookName).includes(bookToOpen.bookName!)
+        ? "new"
+        : "old",
+    }));
+  }, [bookToOpen.bookName, bookToOpen.chapter]);
+  ///
 
   return (
     <>
