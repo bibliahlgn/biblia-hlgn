@@ -5,6 +5,7 @@ import { activeListTYPES, bookToOpenTYPES } from "../types";
 import { toggleBookList } from "../utils/toggleSwitch";
 import TestamentSwitch from "../utils/testamentSwitch";
 import { getBookName } from "../utils/smallFunctions";
+import { GhostButton } from "../utils/buttons";
 
 export default function BookList({
   setChapterCount,
@@ -53,9 +54,9 @@ export default function BookList({
             bookToOpen={bookToOpen}
             setBookToOpen={setBookToOpen}
           ></TestamentSwitch>
-          <button
-            className="mr-8"
-            onClick={() => toggleBookList({ setActiveList })}
+          <GhostButton
+            classname="mr-8"
+            action={() => toggleBookList({ setActiveList })}
           >
             <svg
               width="15"
@@ -72,7 +73,7 @@ export default function BookList({
                 clipRule="evenodd"
               ></path>
             </svg>
-          </button>
+          </GhostButton>
         </div>
         <ul className="mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 pb-12">
           {(bookToOpen.testament === "new" ? books.new : books.old).map((i) => (
