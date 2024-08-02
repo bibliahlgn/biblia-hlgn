@@ -28,7 +28,7 @@ export default function TestamentSwitch({
   return (
     <button
       onClick={() => toggleTestament()}
-      className="border-border_clr/40 hover:bg-accent group relative grid grid-cols-2 items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-md border px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="border-border_clr/40 hover:bg-accent focus-visible:bg-accent group relative grid grid-cols-2 items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-md border px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <span
         data-isnew={isnew ? "true" : "false"}
@@ -44,7 +44,7 @@ export default function TestamentSwitch({
       </span>
       <div
         data-isnew={isnew ? "true" : "false"}
-        className="bg-foreground group-hover:bg-foreground/80 absolute inset-y-0 left-0 h-full w-1/2 transition-all duration-300 data-isnew:left-1/2 data-isnew:right-0"
+        className="bg-foreground group-hover:bg-foreground/80 group-focus-visible:bg-foreground/80 absolute inset-y-0 left-0 h-full w-1/2 transition-all duration-300 data-isnew:left-1/2 data-isnew:right-0"
       ></div>
     </button>
   );
