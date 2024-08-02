@@ -1,20 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  :root {
+    --accent: 240 10% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --borders: 240 5.9% 90%;
+  }
+  .dark {
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --muted-foreground: 240 5% 64.9%;
+    --borders: 240 3.7% 15.9%;
+  }
 
-:root {
-  --accent: 240 10% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --borders: 240 5.9% 90%;
-}
-.dark {
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --muted-foreground: 240 5% 64.9%;
-  --borders: 240 3.7% 15.9%;
+  .prose p:first-of-type {
+    margin-top: 2.5rem;
+  }
+
+  .ghost-hover {
+    @apply transition-colors hover:cursor-pointer hover:bg-accent/90;
+  }
+  .ghost-button {
+    @apply rounded px-2 py-1;
+  }
 }

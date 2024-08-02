@@ -29,7 +29,7 @@ export default function ChapterList({
       items.push(
         <li
           key={i}
-          className="text-foreground hover:bg-accent flex-shrink-0 basis-10 rounded-md p-1 text-center transition-colors hover:cursor-pointer"
+          className="text-foreground ghost-hover flex-shrink-0 basis-10 rounded-md p-1 text-center"
           onClick={prepareContent}
         >
           {i}
