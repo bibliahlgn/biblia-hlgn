@@ -48,7 +48,7 @@ export default function Contents({
 
   return (
     <article
-      className="prose-headings:text-foreground prose-p:text-foreground prose px-4 py-2 prose-h1:text-lg"
+      className="prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose px-4 py-2 prose-h1:text-lg prose-strong:text-3xl prose-strong:font-bold"
       dangerouslySetInnerHTML={{ __html: rawContent }}
     ></article>
   );
