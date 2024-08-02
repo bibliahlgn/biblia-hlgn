@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import DOMPurify from "dompurify";
 import { bookToOpenTYPES } from "../types";
+import About from "./about";
 
 export default function Contents({
   rawContent,
   setRawContent,
   pathFragments,
+  activeAbout,
 }: {
   rawContent: string;
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
   pathFragments: bookToOpenTYPES;
+  activeAbout: boolean;
 }) {
   useEffect(() => {
     const fetchBook = async () => {
@@ -47,9 +50,12 @@ export default function Contents({
   }, [pathFragments.chapter]);
 
   return (
-    <article
-      className="prose px-4 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground"
-      dangerouslySetInnerHTML={{ __html: rawContent }}
-    ></article>
+    <div className="prose px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground">
+      {activeAbout ? (
+        <About></About>
+      ) : (
+        <article dangerouslySetInnerHTML={{ __html: rawContent }}></article>
+      )}
+    </div>
   );
 }

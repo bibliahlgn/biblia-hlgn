@@ -9,6 +9,7 @@ import { getBookName } from "./utils/smallFunctions";
 
 function App() {
   const [rawContent, setRawContent] = useState<string>("");
+  const [activeAbout, setActiveAbout] = useState<boolean>(false);
   //chapterCount is the total number of chapters in a book (selected book)
   const [chapterCount, setChapterCount] = useState<number>(() => {
     const session = sessionStorage.getItem("CHAPTERCOUNT");
@@ -56,7 +57,12 @@ function App() {
 
   return (
     <>
-      <Header setActiveList={setActiveList} bookToOpen={bookToOpen} />
+      <Header
+        setActiveList={setActiveList}
+        bookToOpen={bookToOpen}
+        activeAbout={activeAbout}
+        setActiveAbout={setActiveAbout}
+      />
       <main className="relative min-h-dvh">
         <BookList
           setChapterCount={setChapterCount}
@@ -70,6 +76,7 @@ function App() {
           rawContent={rawContent}
           setRawContent={setRawContent}
           pathFragments={bookToOpen}
+          activeAbout={activeAbout}
         ></Contents>
         <ChapterList
           chapterCount={chapterCount}
