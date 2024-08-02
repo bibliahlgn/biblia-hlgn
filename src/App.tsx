@@ -40,21 +40,19 @@ function App() {
   }, [bookToOpen, chapterCount]);
 
   useEffect(() => {
-    if (activeList.bookList) {
-      document.body.classList.add("overflow-hidden");
-    } else document.body.classList.remove("overflow-hidden");
-  }, [activeList.bookList]);
-
-  //Temporary fix, needs the client to refresh
-  useEffect(() => {
+    //Temporary fix, needs the client to refresh
     setBookToOpen((prev) => ({
       ...prev,
       testament: books.new.map(getBookName).includes(bookToOpen.bookName!)
         ? "new"
         : "old",
     }));
-  }, [bookToOpen.bookName, bookToOpen.chapter]);
-  ///
+    ///
+
+    if (activeList.bookList) {
+      document.body.classList.add("overflow-hidden");
+    } else document.body.classList.remove("overflow-hidden");
+  }, [activeList.bookList]);
 
   return (
     <>
