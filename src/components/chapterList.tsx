@@ -29,7 +29,7 @@ export default function ChapterList({
       items.push(
         <li
           key={i}
-          className="text-foreground ghost-hover flex-shrink-0 basis-10 rounded-md p-1 text-center"
+          className="ghost-hover flex-shrink-0 basis-10 rounded-md p-1 text-center text-foreground"
           onClick={prepareContent}
         >
           {i}
@@ -39,10 +39,12 @@ export default function ChapterList({
     return items;
   };
 
+  //Chapter list needs to stay open when opening the about section
+
   return (
     <div
       data-activelist={activeList.chapterList ? "true" : "false"}
-      className="bg-background absolute inset-x-0 top-0 hidden min-h-dvh p-4 data-activelist:block"
+      className="absolute inset-x-0 top-0 hidden min-h-dvh p-4 data-activelist:block"
     >
       <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>
     </div>
