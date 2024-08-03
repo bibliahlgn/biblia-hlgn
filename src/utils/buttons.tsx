@@ -11,7 +11,7 @@ export function GhostButton({
 }) {
   return (
     <button
-      className={`${classname && classname} ghost-hover ghost-button text-foreground`}
+      className={`${classname && classname} ghost-hover ghost-button text-foreground *:size-5`}
       onClick={() => action()}
     >
       {children}

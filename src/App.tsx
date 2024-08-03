@@ -72,12 +72,14 @@ function App() {
           bookToOpen={bookToOpen}
           setBookToOpen={setBookToOpen}
         />
-        <Contents
-          rawContent={rawContent}
-          setRawContent={setRawContent}
-          pathFragments={bookToOpen}
-          activeAbout={activeAbout}
-        ></Contents>
+        {!activeList.chapterList && (
+          <Contents
+            rawContent={rawContent}
+            setRawContent={setRawContent}
+            pathFragments={bookToOpen}
+            activeAbout={activeAbout}
+          ></Contents>
+        )}
         <ChapterList
           chapterCount={chapterCount}
           activeList={activeList}
