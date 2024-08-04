@@ -32,7 +32,10 @@ function App() {
         ? false
         : true,
     chapterList:
-      bookToOpen.bookName != "" && bookToOpen.chapter == "" ? true : false,
+      (bookToOpen.bookName != "" && bookToOpen.chapter == "") ||
+      bookToOpen.chapter == ""
+        ? true
+        : false,
   });
 
   useEffect(() => {
@@ -55,6 +58,13 @@ function App() {
     } else document.body.classList.remove("overflow-hidden");
   }, [activeList.bookList]);
 
+  useEffect(() => {
+    setActiveList((prev) => ({
+      ...prev,
+      chapterList: bookToOpen.chapter == "" && !activeAbout ? true : false,
+    }));
+  }, [activeAbout]);
+
   return (
     <>
       <Header
@@ -62,6 +72,7 @@ function App() {
         bookToOpen={bookToOpen}
         activeAbout={activeAbout}
         setActiveAbout={setActiveAbout}
+        chapterFragment={bookToOpen.chapter!}
       />
       <main className="relative min-h-dvh">
         <BookList
@@ -72,14 +83,17 @@ function App() {
           bookToOpen={bookToOpen}
           setBookToOpen={setBookToOpen}
         />
-        {!activeList.chapterList && (
+        <div
+          data-activelist={activeList.chapterList ? "true" : "false"}
+          className="prose px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:data-activelist:hidden"
+        >
           <Contents
             rawContent={rawContent}
             setRawContent={setRawContent}
             pathFragments={bookToOpen}
             activeAbout={activeAbout}
           ></Contents>
-        )}
+        </div>
         <ChapterList
           chapterCount={chapterCount}
           activeList={activeList}
