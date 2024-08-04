@@ -2,12 +2,10 @@ import { activeListTYPES, bookToOpenTYPES } from "../types";
 
 export default function ChapterList({
   chapterCount,
-  activeList,
   setActiveList,
   setBookToOpen,
 }: {
   chapterCount: number;
-  activeList: activeListTYPES;
   setActiveList: React.Dispatch<React.SetStateAction<activeListTYPES>>;
   setBookToOpen: React.Dispatch<React.SetStateAction<bookToOpenTYPES>>;
 }) {
@@ -16,8 +14,7 @@ export default function ChapterList({
     setActiveList({ chapterList: false });
 
     setBookToOpen((prev) => ({
-      testament: prev.testament,
-      bookName: prev.bookName,
+      ...prev,
       chapter: chapter,
     }));
   };
@@ -38,15 +35,6 @@ export default function ChapterList({
     }
     return items;
   };
-  //IMPLEMENTED
-  //Chapter list needs to stay open when opening the about section
 
-  return (
-    <div
-      data-activelist={activeList.chapterList ? "true" : "false"}
-      className="absolute inset-x-0 top-0 hidden min-h-dvh p-4 data-activelist:block"
-    >
-      <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>
-    </div>
-  );
+  return <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>;
 }
