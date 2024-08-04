@@ -16,14 +16,9 @@ function Header({
   bookToOpen: bookToOpenTYPES;
   activeAbout: boolean;
   setActiveAbout: React.Dispatch<React.SetStateAction<boolean>>;
+  chapterFragment: string;
 }) {
-  const toggleAbout = () => {
-    setActiveList({
-      bookList: false,
-      chapterList: false,
-    });
-    setActiveAbout((prevState) => !prevState);
-  };
+  const toggleAbout = () => setActiveAbout((prevState) => !prevState);
 
   return (
     <header className="sticky top-0 z-10 flex min-h-[50px] justify-between border border-border_clr/40 bg-background/90 px-4 py-2 backdrop-blur supports-[backdrop-filter]:bg-background/50">

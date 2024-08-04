@@ -38,7 +38,7 @@ export default function ChapterList({
     }
     return items;
   };
-
+  //IMPLEMENTED
   //Chapter list needs to stay open when opening the about section
 
   return (
