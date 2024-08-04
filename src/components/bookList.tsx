@@ -14,6 +14,8 @@ export default function BookList({
   setRawContent,
   bookToOpen,
   setBookToOpen,
+  activeTestament,
+  setActiveTestament,
 }: {
   setChapterCount: React.Dispatch<React.SetStateAction<number>>;
   activeList: activeListTYPES;
@@ -21,23 +23,23 @@ export default function BookList({
   setRawContent: React.Dispatch<React.SetStateAction<string>>;
   bookToOpen: bookToOpenTYPES;
   setBookToOpen: React.Dispatch<React.SetStateAction<bookToOpenTYPES>>;
+  activeTestament: "old" | "new";
+  setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
 }) {
   const toggleChapters = (i: string) => {
     const count = parseInt(i.match(/\d+/)![0]);
 
     setChapterCount(count);
     setBookToOpen((prev) => ({
-      testament: prev.testament,
+      ...prev,
       bookName: getBookName(i),
-      chapter: prev.chapter,
     }));
     setActiveList({ chapterList: true, bookList: false });
 
     if (bookToOpen.bookName !== getBookName(i)) {
       setRawContent("");
       setBookToOpen((prev) => ({
-        testament: prev.testament,
-        bookName: prev.bookName,
+        ...prev,
         chapter: "",
       }));
     }
@@ -47,15 +49,15 @@ export default function BookList({
     <div>
       <nav
         data-activelist={activeList.bookList ? "true" : "false"}
-        className="fixed inset-y-0 -left-full z-20 w-3/4 bg-background py-6 pl-12 transition-all duration-300 data-activelist:left-0"
+        className="fixed inset-y-0 -left-full z-20 w-3/4 bg-white py-6 pl-12 transition-all duration-300 data-activelist:left-0 md:sticky md:top-[50px] md:h-[calc(100dvh-50px)] md:w-full"
       >
         <div className="flex justify-between">
           <TestamentSwitch
-            bookToOpen={bookToOpen}
-            setBookToOpen={setBookToOpen}
+            activeTestament={activeTestament}
+            setActiveTestament={setActiveTestament}
           ></TestamentSwitch>
           <GhostButton
-            classname="mr-8"
+            classname="mr-8 md:hidden"
             action={() => toggleBookList({ setActiveList })}
           >
             <svg
@@ -73,7 +75,7 @@ export default function BookList({
           </GhostButton>
         </div>
         <ul className="mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 pb-12">
-          {(bookToOpen.testament === "new" ? books.new : books.old).map((i) => (
+          {(activeTestament === "new" ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}
               bookName={getBookName(i)}
@@ -85,7 +87,7 @@ export default function BookList({
       <div
         data-activelist={activeList.bookList ? "true" : "false"}
         onClick={() => toggleBookList({ setActiveList })}
-        className="fixed inset-0 z-10 hidden bg-black/80 backdrop-blur data-activelist:block supports-[backdrop-filter]:bg-black/55"
+        className="fixed inset-0 z-10 hidden bg-black/80 backdrop-blur data-activelist:block supports-[backdrop-filter]:bg-black/55 md:!hidden"
       ></div>
     </div>
   );

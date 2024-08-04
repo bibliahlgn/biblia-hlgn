@@ -1,12 +1,11 @@
 import React from "react";
-import { bookToOpenTYPES } from "../types";
 
 export default function TestamentSwitch({
-  bookToOpen,
-  setBookToOpen,
+  activeTestament,
+  setActiveTestament,
 }: {
-  bookToOpen: bookToOpenTYPES;
-  setBookToOpen: React.Dispatch<React.SetStateAction<bookToOpenTYPES>>;
+  activeTestament: "old" | "new";
+  setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
 }) {
   const toggleTestament = () => {
     const getTestament = (testament: string) => {
@@ -16,14 +15,10 @@ export default function TestamentSwitch({
         return "old";
       } else return "old";
     };
-    setBookToOpen((prev) => ({
-      testament: getTestament(prev.testament!),
-      bookName: prev.bookName,
-      chapter: prev.chapter,
-    }));
+    setActiveTestament((prev) => getTestament(prev));
   };
 
-  const isnew = bookToOpen.testament == "new";
+  const isnew = activeTestament == "new";
 
   return (
     <button
