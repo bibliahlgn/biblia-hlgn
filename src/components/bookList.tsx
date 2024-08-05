@@ -27,7 +27,7 @@ export default function BookList({
   setActiveTestament: React.Dispatch<React.SetStateAction<"old" | "new">>;
 }) {
   const toggleChapters = (i: string) => {
-    const count = parseInt(i.match(/\d+/)![0]);
+    const count = parseInt(i.match(/\d+$/)![0]);
 
     setChapterCount(count);
     setBookToOpen((prev) => ({
