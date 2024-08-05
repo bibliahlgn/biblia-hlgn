@@ -11,11 +11,14 @@ export default {
         muted_fg: "hsl(var(--muted-foreground))",
         border_clr: "hsl(var(--borders))",
       },
+      screens: {
+        md: "800px",
+      },
     },
     data: {
       isnew: "isnew='true'",
       activelist: "activelist='true'",
-      visiblecontent: "visiblecontent='true'",
+      activeabout: "activeabout='true'",
       darktheme: "darktheme='true'",
     },
   },

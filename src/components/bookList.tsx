@@ -46,10 +46,10 @@ export default function BookList({
   };
 
   return (
-    <div>
+    <>
       <nav
         data-activelist={activeList.bookList ? "true" : "false"}
-        className="fixed inset-y-0 -left-full z-20 w-3/4 bg-white py-6 pl-12 transition-all duration-300 data-activelist:left-0 md:sticky md:top-[50px] md:h-[calc(100dvh-50px)] md:w-full"
+        className="fixed inset-y-0 -left-full z-20 w-3/4 bg-background py-6 pl-12 transition-all duration-300 data-activelist:left-0 md:w-1/2 lg:sticky lg:top-[50px] lg:h-[calc(100dvh-50px)] lg:w-full lg:border-r-2 lg:border-border_clr"
       >
         <div className="flex justify-between">
           <TestamentSwitch
@@ -57,7 +57,7 @@ export default function BookList({
             setActiveTestament={setActiveTestament}
           ></TestamentSwitch>
           <GhostButton
-            classname="mr-8 md:hidden"
+            classname="mr-8 lg:hidden"
             action={() => toggleBookList({ setActiveList })}
           >
             <svg
@@ -74,7 +74,7 @@ export default function BookList({
             </svg>
           </GhostButton>
         </div>
-        <ul className="mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 pb-12">
+        <ul className="mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 overflow-y-auto pb-12">
           {(activeTestament === "new" ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}
@@ -87,8 +87,8 @@ export default function BookList({
       <div
         data-activelist={activeList.bookList ? "true" : "false"}
         onClick={() => toggleBookList({ setActiveList })}
-        className="fixed inset-0 z-10 hidden bg-black/80 backdrop-blur data-activelist:block supports-[backdrop-filter]:bg-black/55 md:!hidden"
+        className="void-screen fixed inset-0 z-10 hidden bg-black/80 backdrop-blur data-activelist:block supports-[backdrop-filter]:bg-black/55 lg:!hidden"
       ></div>
-    </div>
+    </>
   );
 }

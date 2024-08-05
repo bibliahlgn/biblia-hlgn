@@ -4,6 +4,7 @@ import BookList from "./components/bookList";
 import ChapterList from "./components/chapterList";
 import Contents from "./components/contents";
 import { activeListTYPES, bookToOpenTYPES } from "./types";
+import DOMPurify from "dompurify";
 
 function App() {
   const [rawContent, setRawContent] = useState<string>("");
@@ -46,21 +47,18 @@ function App() {
   }, [bookToOpen, chapterCount]);
 
   useEffect(() => {
-    //Temporary fix, needs the client to refresh
-    //FIXED
-    ///
-
     if (activeList.bookList) {
       document.body.classList.add("overflow-hidden");
     } else document.body.classList.remove("overflow-hidden");
   }, [activeList.bookList]);
 
-  //This is the fix of the above issue
   useEffect(() => {
-    setBookToOpen((prev) => ({
-      ...prev,
-      testament: activeTestament,
-    }));
+    if (activeTestament != bookToOpen.testament) {
+      setBookToOpen((prev) => ({
+        ...prev,
+        testament: activeTestament,
+      }));
+    }
 
     sessionStorage.setItem("TESTAMENT", activeTestament);
   }, [bookToOpen.bookName]);
@@ -72,6 +70,41 @@ function App() {
     }));
   }, [activeAbout]);
 
+  useEffect(() => {
+    const fetchBook = async () => {
+      if (
+        bookToOpen.bookName != "" &&
+        bookToOpen.chapter != "" &&
+        bookToOpen.testament != null
+      ) {
+        const pathToBook = `books/${bookToOpen.testament.toLowerCase()}/${bookToOpen.bookName?.toLowerCase()}/${bookToOpen.bookName?.toLowerCase()}${bookToOpen.chapter}.htm`;
+
+        const resp = await fetch(pathToBook);
+        const raw = await resp.text();
+        const purifiedHTML = DOMPurify.sanitize(raw, {
+          ALLOWED_TAGS: [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "p",
+            "strong",
+            "sup",
+          ],
+          USE_PROFILES: {
+            html: true,
+          },
+        });
+
+        setRawContent(purifiedHTML);
+      }
+    };
+    fetchBook();
+    setActiveTestament(sessionStorage.getItem("TESTAMENT") as "old" | "new");
+  }, [bookToOpen.chapter]);
+
   return (
     <>
       <Header
@@ -81,38 +114,41 @@ function App() {
         setActiveAbout={setActiveAbout}
         chapterFragment={bookToOpen.chapter!}
       />
-      <main className="relative grid min-h-dvh grid-cols-4">
-        <BookList
-          setChapterCount={setChapterCount}
-          activeList={activeList}
-          setActiveList={setActiveList}
-          setRawContent={setRawContent}
-          bookToOpen={bookToOpen}
-          setBookToOpen={setBookToOpen}
-          activeTestament={activeTestament}
-          setActiveTestament={setActiveTestament}
-        />
-        <div
+      <main className="relative md:grid md:grid-cols-3 lg:grid-cols-4">
+        {!activeAbout && (
+          <BookList
+            setChapterCount={setChapterCount}
+            activeList={activeList}
+            setActiveList={setActiveList}
+            setRawContent={setRawContent}
+            bookToOpen={bookToOpen}
+            setBookToOpen={setBookToOpen}
+            activeTestament={activeTestament}
+            setActiveTestament={setActiveTestament}
+          />
+        )}
+        <article
+          data-activeabout={activeAbout ? "true" : "false"}
           data-activelist={activeList.chapterList ? "true" : "false"}
-          className="prose px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:data-activelist:hidden md:col-span-2"
+          className="md:data-activeabout:m-auto md:data-activeabout:col-span-full prose px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:data-activelist:hidden md:col-span-2"
         >
           <Contents
             rawContent={rawContent}
-            setRawContent={setRawContent}
-            pathFragments={bookToOpen}
             activeAbout={activeAbout}
           ></Contents>
-        </div>
-        <div
-          data-activelist={activeList.chapterList ? "true" : "false"}
-          className="absolute inset-x-0 top-0 hidden min-h-dvh p-4 data-activelist:block md:static md:block"
-        >
-          <ChapterList
-            chapterCount={chapterCount}
-            setActiveList={setActiveList}
-            setBookToOpen={setBookToOpen}
-          />
-        </div>
+        </article>
+        {!activeAbout && (
+          <nav
+            data-activelist={activeList.chapterList ? "true" : "false"}
+            className="sticky inset-x-0 top-[50px] hidden h-[calc(100dvh-50px)] p-4 data-activelist:block md:block md:overflow-y-auto md:pr-0"
+          >
+            <ChapterList
+              chapterCount={chapterCount}
+              setActiveList={setActiveList}
+              setBookToOpen={setBookToOpen}
+            />
+          </nav>
+        )}
       </main>
     </>
   );

@@ -21,7 +21,7 @@ function Header({
   const toggleAbout = () => setActiveAbout((prevState) => !prevState);
 
   return (
-    <header className="sticky top-0 z-10 flex min-h-[50px] justify-between border border-border_clr/40 bg-background/90 px-4 py-2 backdrop-blur supports-[backdrop-filter]:bg-background/50">
+    <header className="sticky top-0 z-10 flex min-h-[50px] justify-between border border-border_clr/40 bg-background/90 px-4 py-2 backdrop-blur supports-[backdrop-filter]:bg-background/50 lg:px-8">
       <div className="flex">
         {activeAbout ? (
           <div className="ghost-button text-foreground">About</div>
@@ -29,7 +29,7 @@ function Header({
           <>
             <GhostButton
               action={() => toggleBookList({ setActiveList })}
-              classname="px-2"
+              classname="px-2 lg:hover:!cursor-text lg:!bg-transparent"
             >
               {bookToOpen.bookName == "" ? (
                 <svg
@@ -37,6 +37,7 @@ function Header({
                   width="36"
                   height="36"
                   viewBox="0 0 9.525 9.525"
+                  className="lg:hidden"
                 >
                   <path
                     fill="currentColor"
@@ -50,7 +51,7 @@ function Header({
             {bookToOpen.chapter != "" && (
               <GhostButton
                 action={() => toggleChapterList({ setActiveList })}
-                classname="min-w-8"
+                classname="min-w-8 md:hover:!cursor-text md:!bg-transparent"
               >
                 {bookToOpen.chapter}
               </GhostButton>

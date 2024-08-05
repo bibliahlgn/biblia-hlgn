@@ -36,5 +36,9 @@ export default function ChapterList({
     return items;
   };
 
-  return <ul className="flex flex-wrap gap-2">{renderChapterButtons()}</ul>;
+  return (
+    <ul className="flex max-h-[calc(100vh-8rem)] flex-wrap gap-2 overflow-y-auto">
+      {renderChapterButtons()}
+    </ul>
+  );
 }
