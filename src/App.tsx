@@ -6,8 +6,10 @@ import Contents from "./components/contents";
 import { activeListTYPES, bookToOpenTYPES } from "./types";
 import DOMPurify from "dompurify";
 import { appWindow } from "@tauri-apps/api/window";
+import { FontControl } from "./utils/fontSizeControl";
 
 function App() {
+  const [fontSize, setFontSize] = useState<number>(1);
   const [rawContent, setRawContent] = useState<string>("");
   const [activeAbout, setActiveAbout] = useState<boolean>(false);
   const [activeTestament, setActiveTestament] = useState<"old" | "new">(() => {
@@ -155,13 +157,19 @@ function App() {
             data-activelist={
               activeList.chapterList && !activeAbout ? "true" : "false"
             }
-            className="prose relative max-w-none px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-h2:text-lg prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:min-h-[calc(100dvh-50px)] max-md:data-activelist:hidden"
+            className="prose relative max-w-none px-5 py-12 transition-all prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-h2:text-lg prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:min-h-[calc(100dvh-50px)] max-md:data-activelist:hidden"
+            style={{ fontSize: `${fontSize}rem` }}
           >
             <Contents
               rawContent={rawContent}
               activeAbout={activeAbout}
             ></Contents>
           </article>
+          {!activeAbout && (
+            <div className="pointer-events-none fixed bottom-0 w-full bg-transparent">
+              <FontControl setFontSize={setFontSize}></FontControl>
+            </div>
+          )}
           {!rawContent && !activeAbout && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
