@@ -151,13 +151,13 @@ function App() {
         )}
         <div
           data-activeabout={activeAbout ? "true" : "false"}
-          className="relative md:col-span-2 md:data-activeabout:col-span-full md:data-activeabout:m-auto"
+          className="relative md:col-span-2 md:data-activeabout:col-span-full md:data-activeabout:m-auto md:data-activeabout:w-1/2"
         >
           <article
             data-activelist={
               activeList.chapterList && !activeAbout ? "true" : "false"
             }
-            className="prose relative max-w-none px-5 py-12 transition-all prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-h2:text-lg prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:min-h-[calc(100dvh-50px)] max-md:data-activelist:hidden"
+            className="prose relative max-w-none px-5 py-12 transition-all prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-h2:text-lg prose-p:my-3 prose-p:text-foreground prose-a:text-foreground prose-a:transition-all prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground prose-ul:list-none hover:prose-a:text-muted_fg max-md:min-h-[calc(100dvh-50px)] max-md:data-activelist:hidden"
             style={{ fontSize: `${fontSize}rem` }}
           >
             <Contents
