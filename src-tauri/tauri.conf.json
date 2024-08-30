@@ -12,7 +12,10 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "window": {
+        "setTitle": true
+      }
     },
     "bundle": {
       "active": true,
@@ -30,7 +33,7 @@
         "icons/icon.ico"
       ],
       "identifier": "word.hiligaynon.bible",
-      "longDescription": "",
+      "longDescription": "Hiligaynon Bible copied from biblica.com for offline access (unofficial)",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -39,7 +42,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "A Bible in hiligayon language",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
@@ -60,6 +63,7 @@
         "resizable": true,
         "title": "Hiligaynon Bible",
         "width": 750,
+        "minWidth": 700,
         "additionalBrowserArgs": "--enable-features=OverlayScrollbar,msOverlayScrollbarWinStyle,msOverlayScrollbarWinStyleAnimation"
       }
     ]
