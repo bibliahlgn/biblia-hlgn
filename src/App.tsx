@@ -5,6 +5,7 @@ import ChapterList from "./components/chapterList";
 import Contents from "./components/contents";
 import { activeListTYPES, bookToOpenTYPES } from "./types";
 import DOMPurify from "dompurify";
+import { appWindow } from "@tauri-apps/api/window";
 
 function App() {
   const [rawContent, setRawContent] = useState<string>("");
@@ -96,6 +97,24 @@ function App() {
     fetchBook();
     setActiveTestament(sessionStorage.getItem("TESTAMENT") as "old" | "new");
   }, [bookToOpen.chapter]);
+
+  useEffect(() => {
+    if ((bookToOpen.bookName != undefined, bookToOpen.chapter != undefined)) {
+      appWindow.setTitle(`${bookToOpen.bookName} ${bookToOpen.chapter}`);
+    } else null;
+  }, [bookToOpen.bookName, bookToOpen.chapter]);
+
+  useEffect(() => {
+    appWindow.setTitle("Hiligaynon Bible");
+
+    // const handleContextMenu = (event: MouseEvent) => {
+    //   event.preventDefault();
+    // };
+    // document.addEventListener("contextmenu", handleContextMenu);
+    // return () => {
+    //   document.removeEventListener("contextmenu", handleContextMenu);
+    // };
+  }, []);
 
   return (
     <>
