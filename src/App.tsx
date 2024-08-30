@@ -151,7 +151,7 @@ function App() {
         )}
         <div
           data-activeabout={activeAbout ? "true" : "false"}
-          className="md:col-span-2 md:data-activeabout:col-span-full md:data-activeabout:m-auto"
+          className="relative md:col-span-2 md:data-activeabout:col-span-full md:data-activeabout:m-auto"
         >
           <article
             data-activelist={
