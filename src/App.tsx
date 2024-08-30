@@ -165,8 +165,8 @@ function App() {
               activeAbout={activeAbout}
             ></Contents>
           </article>
-          {!activeAbout && (
-            <div className="pointer-events-none fixed bottom-0 w-full bg-transparent">
+          {!activeAbout && bookToOpen.chapter != "" && (
+            <div className="pointer-events-none fixed bottom-0 grid w-full bg-transparent md:grid-cols-3 lg:grid-cols-4">
               <FontControl setFontSize={setFontSize}></FontControl>
             </div>
           )}
