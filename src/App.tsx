@@ -47,9 +47,16 @@ function App() {
   }, [bookToOpen, chapterCount]);
 
   useEffect(() => {
-    if (activeList.bookList) {
-      document.body.classList.add("overflow-hidden");
-    } else document.body.classList.remove("overflow-hidden");
+    const handleResize = () => {
+      if (activeList.bookList && window.innerWidth < 1024) {
+        document.body.classList.add("overflow-hidden");
+      } else document.body.classList.remove("overflow-hidden");
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [activeList.bookList]);
 
   useEffect(() => {
@@ -105,7 +112,9 @@ function App() {
   }, [bookToOpen.bookName, bookToOpen.chapter]);
 
   useEffect(() => {
-    appWindow.setTitle("Hiligaynon Bible");
+    if (bookToOpen.bookName == "" || bookToOpen.chapter == "") {
+      appWindow.setTitle("Hiligaynon Bible");
+    }
 
     // const handleContextMenu = (event: MouseEvent) => {
     //   event.preventDefault();
