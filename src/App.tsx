@@ -62,18 +62,6 @@ function App() {
     sessionStorage.setItem("TESTAMENT", activeTestament);
   }, [bookToOpen.bookName]);
 
-  // useEffect(() => {
-  //   setActiveList((prev) => ({
-  //     ...prev,
-  //     chapterList:
-  //       bookToOpen.chapter == "" && activeAbout
-  //         ? false
-  //         : bookToOpen.bookName != "" && activeAbout && true,
-  //   }));
-  // }, [activeAbout]);
-
-  console.log(activeList.chapterList);
-
   useEffect(() => {
     const fetchBook = async () => {
       if (
@@ -139,7 +127,7 @@ function App() {
             data-activelist={
               activeList.chapterList && !activeAbout ? "true" : "false"
             }
-            className="prose relative px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-h2:text-lg prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:min-h-[calc(100dvh-50px)] max-md:data-activelist:hidden"
+            className="prose relative max-w-none px-5 py-12 prose-headings:mb-4 prose-headings:text-center prose-headings:text-foreground prose-h1:text-xl prose-h2:text-lg prose-p:my-3 prose-p:text-foreground prose-strong:mb-10 prose-strong:mt-4 prose-strong:block prose-strong:!text-center prose-strong:text-3xl prose-strong:font-bold prose-strong:text-foreground max-md:min-h-[calc(100dvh-50px)] max-md:data-activelist:hidden"
           >
             <Contents
               rawContent={rawContent}

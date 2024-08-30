@@ -74,7 +74,7 @@ export default function BookList({
             </svg>
           </GhostButton>
         </div>
-        <ul className="mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 overflow-y-auto pb-12">
+        <ul className="scrollbar mt-4 grid max-h-[calc(100vh-8rem)] gap-y-3 overflow-y-auto pb-12">
           {(activeTestament === "new" ? books.new : books.old).map((i) => (
             <BookListItem
               key={i}

@@ -29,4 +29,45 @@
   .ghost-button {
     @apply rounded px-2 py-1;
   }
+
+  @font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    src:
+      url("/assets/inter/Inter-Regular.woff2") format("woff2"),
+      url("/assets/inter/Inter-Regular.woff") format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-weight: 500;
+    src:
+      url("/assets/inter/Inter-Medium.woff2") format("woff2"),
+      url("/assets/inter/Inter-Medium.woff") format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-weight: 600;
+    src:
+      url("/assets/inter/Inter-SemiBold.woff2") format("woff2"),
+      url("/assets/inter/Inter-SemiBold.woff") format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    src:
+      url("/assets/inter/Inter-Bold.woff2") format("woff2"),
+      url("/assets/inter/Inter-Bold.woff") format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-weight: 900;
+    src:
+      url("/assets/inter/Inter-Black.woff2") format("woff2"),
+      url("/assets/inter/Inter-Black.woff") format("woff");
+    font-display: swap;
+  }
 }
