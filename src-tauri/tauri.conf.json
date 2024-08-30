@@ -65,7 +65,7 @@
         "title": "Hiligaynon Bible",
         "width": 750,
         "minHeight": 550,
-        "minWidth": 700,
+        "minWidth": 300,
         "additionalBrowserArgs": "--enable-features=OverlayScrollbar,msOverlayScrollbarWinStyle,msOverlayScrollbarWinStyleAnimation"
       }
     ]
